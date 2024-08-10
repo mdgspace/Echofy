@@ -10,15 +10,7 @@ import useSettings from "../hooks/useSettings";
 import useWebsocket from "../hooks/useWebsocket";
 import useLeaveChat from "../hooks/useLeaveChat";
 import useVisibilityChange from "../hooks/useVisibilityChange";
-<<<<<<< HEAD
-interface Message {
-  text: string;
-  sender: 'user' | 'chatbot';
-  timestamp?: Date;
-  isSent?: boolean;  // Optional for messages not yet sent
-  username?: string; // Optional if not all messages have usernames
-  // ... other properties as needed (e.g., message ID, attachments)
-}
+
 interface UseLoadSettingHook {
   (setSoundEnabled: (enabled: boolean) => void, setNotificationsEnabled: (enabled: boolean) => void): void;
 }
@@ -66,7 +58,7 @@ interface BoxProps {
 interface NavbarProps {
   currentPage: string;
   currentTopic?: string; 
-=======
+}
 
 interface Message {
   avatar?: string;
@@ -74,7 +66,6 @@ interface Message {
   text: string;
   timestamp: number;
   isSent: boolean;
->>>>>>> 5c322dd5afd2aba0870008ca9bcd0d582dc9eeab
 }
 
 export default function Home(){

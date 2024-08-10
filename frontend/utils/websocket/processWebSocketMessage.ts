@@ -8,7 +8,7 @@ export default function processWebSocketMessage(
     isChatbot,
   ) {
     if (isChatbot) {
-      const userIdRegex = /\buserID\b/;
+      const userIdRegex = /\buserID\b/; 
       if (userIdRegex.test(event.data)) {
         handleUserID(JSON.parse(event.data));
       }
@@ -44,7 +44,7 @@ export default function processWebSocketMessage(
   
     function handleBannedUser(data, navigateToLogin) {
       if (data.Message && data.Message === "You are banned now") {
-        alertBannedUser(data.Message);
+        alertBannedUser(data.Message,navigateToLogin);
         navigateToLogin();
         return true;
       }
