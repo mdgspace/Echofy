@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { UseSettingsProps } from "../interface/interface";
-function useSettings({ soundEnabled, notificationsEnabled }: UseSettingsProps) {
+function useSettings(soundEnabled, notificationsEnabled) {
   useEffect(() => {
     localStorage.setItem("soundEnabled", JSON.stringify(soundEnabled));
   }, [soundEnabled]);

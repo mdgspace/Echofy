@@ -1,4 +1,4 @@
-import React, { Dispatch, MutableRefObject, ReactNode, SetStateAction, useEffect } from "react";
+import React, { Dispatch, MutableRefObject, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import alertServerError from "../utils/alerts/alertServerError";
 
@@ -118,8 +118,8 @@ export interface MailProps {
   }
 
   export interface UseLoadSettingProps {
-    setSoundEnabled: (value: boolean) => void;
-    setNotificationsEnabled: (value: boolean) => void;
+    setSoundEnabled: typeof useState;
+    setNotificationsEnabled: typeof useState;
   }
 
   export interface UseSettingsProps {
@@ -128,7 +128,7 @@ export interface MailProps {
   }
 
   export interface UseVisibilityChangeProps {
-    setUnreadCount: (count: number) => void;
+    setUnreadCount: Dispatch<SetStateAction<number>>
 }
 
 export interface UseWebsocketProps {
@@ -136,14 +136,14 @@ export interface UseWebsocketProps {
   channel: string;
   socketRef: React.MutableRefObject<WebSocket | null>;
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
-  router: typeof(useRouter);
+  router: any;
   setUnreadCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface useWebsocketForChatbotProps {
   socketRef: MutableRefObject<WebSocket | null>;
   setMessages: Dispatch<SetStateAction<any[]>>; 
-  router: typeof(useRouter);
+  router: any;
 }
 
 interface UseLoadSettingHook {
