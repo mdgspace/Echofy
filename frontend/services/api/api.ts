@@ -1,14 +1,13 @@
+import { WebSocketHandlers } from "../../interface/interface";
+
 export function initializeWebSocketConnection(
   url: string,
-  onOpen: (event: Event) => void,
-  onMessage: (event: MessageEvent<any>) => void,
-  onClose: (event: CloseEvent) => void,
-  onError: (event: Event) => void
-) :  WebSocket{
+  handlers: WebSocketHandlers
+): WebSocket {
   const socket = new WebSocket(url);
-  socket.onopen = onOpen;
-  socket.onmessage = onMessage;
-  socket.onclose = onClose;
-  socket.onerror = onError;
+  socket.onopen = handlers.onOpen;
+  socket.onmessage = handlers.onMessage;
+  socket.onclose = handlers.onClose;
+  socket.onerror = handlers.onError;
   return socket;
 }

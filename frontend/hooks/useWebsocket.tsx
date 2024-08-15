@@ -7,8 +7,14 @@ import processWebSocketMessage from "../utils/websocket/processWebSocketMessage"
 import { buildWebSocketURL } from "../services/url-builder/url-builder";
 import { initializeWebSocketConnection } from "../services/api/api";
 import playSound from "../utils/playSound";
+import { UseWebsocketProps, Message } from "../interface/interface";
 
-const useWebsocket=(soundEnabled,channel,socketRef,setMessages,router,setUnreadCount)=>{
+interface MessageData {
+  [timestamp: string]: string; 
+}
+
+
+const useWebsocket=({soundEnabled,channel,socketRef,setMessages,router,setUnreadCount}:UseWebsocketProps)=>{
     useEffect(() => {
         const username = getSessionUser();
         if (!username || username === "null" || username === "undefined") {
@@ -73,16 +79,16 @@ const useWebsocket=(soundEnabled,channel,socketRef,setMessages,router,setUnreadC
               allMessages.sort((a, b) => a.timestamp - b.timestamp);
               setMessages(allMessages);
             } else {
-              if (data.text && data.sender && data.timestamp) {
-                let isSent = data.sender === username;
+              if (event.data.text && event.data.sender && event.data.timestamp) {
+                let isSent = event.data.sender === username;
                 setMessages((prevMessages) => [
                   ...prevMessages,
                   {
-                    text: data.text,
+                    text: event.data.text,
                     isSent: isSent,
-                    username: data.sender,
-                    timestamp: parseFloat(data.timestamp),
-                    avatar: data.url,
+                    username: event.data.sender,
+                    timestamp: parseFloat(event.data.timestamp),
+                    avatar: event.data.url,
                   },
                 ]);
                 if (soundEnabled) playSound(isSent);

@@ -1,3 +1,7 @@
+import React, { Dispatch, MutableRefObject, ReactNode, SetStateAction, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import alertServerError from "../utils/alerts/alertServerError";
+
 export interface SettingsPopupProps {
     onClose: () => void;           
     soundEnabled: boolean;           
@@ -103,3 +107,115 @@ export interface MailProps {
     text: string;
     timestamp: number;
   }
+
+  export interface UserContextType {
+    userName: string | null;
+    setUserName: React.Dispatch<React.SetStateAction<string | null>>;
+  }
+
+  export interface UserProviderProps {
+    children: React.ReactNode;
+  }
+
+  export interface UseLoadSettingProps {
+    setSoundEnabled: (value: boolean) => void;
+    setNotificationsEnabled: (value: boolean) => void;
+  }
+
+  export interface UseSettingsProps {
+    soundEnabled: boolean;
+    notificationsEnabled: boolean;
+  }
+
+  export interface UseVisibilityChangeProps {
+    setUnreadCount: (count: number) => void;
+}
+
+export interface UseWebsocketProps {
+  soundEnabled: boolean;
+  channel: string;
+  socketRef: React.MutableRefObject<WebSocket | null>;
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+  router: typeof(useRouter);
+  setUnreadCount: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface useWebsocketForChatbotProps {
+  socketRef: MutableRefObject<WebSocket | null>;
+  setMessages: Dispatch<SetStateAction<any[]>>; 
+  router: typeof(useRouter);
+}
+
+interface UseLoadSettingHook {
+  (setSoundEnabled: (enabled: boolean) => void, setNotificationsEnabled: (enabled: boolean) => void): void;
+}
+
+interface UseSettingsHook {
+  (soundEnabled: boolean, notificationsEnabled: boolean): void;
+}
+
+interface UseWebsocketForChatbotHook {
+  (
+    socketRef: React.MutableRefObject<WebSocket | null>, 
+    setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
+    router: typeof useRouter,
+    messagesEndRef: React.MutableRefObject<HTMLDivElement | null>
+  ): void;
+}
+
+interface UseVisibilityChangeHook {
+  (setUnreadCount: React.Dispatch<React.SetStateAction<number>>): void;
+}
+
+interface UseLeaveChatHook {
+  (router: typeof useRouter, socketRef: React.MutableRefObject<WebSocket | null>): void;
+}
+
+interface ChatbotContainerProps {
+  messages: Message[];
+  messagesEndRef: React.MutableRefObject<HTMLDivElement | null>;
+}
+
+export interface ProcessWebSocketMessageProps {
+  event: MessageEvent;
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
+  navigateToLogin: () => void;
+  isChatbot: boolean;
+}
+
+export interface DataFromServer {
+  userID?: string;
+  Message?: string;
+  Delete?: string;
+}
+
+export interface AlertAbnormalCloseProps {
+  reason: string;
+  navigateToLogin: () => void; // Function to navigate (e.g., from useRouter)
+}
+
+export interface AlertBadRequestProps {
+  reason: string;
+  navigateToLogin: () => void; // Function to navigate (e.g., from useRouter)
+}
+
+export interface WebSocketHandlers {
+  onOpen: (event: Event) => void;
+  onMessage: (event: MessageEvent<any>) => void;
+  onClose: (event: CloseEvent) => void;
+  onError: (event: Event) => void;
+}
+
+export interface AlertBannedUserProps {
+  reason: string;
+  navigateToLogin: () => void;
+}
+export interface AlertSameUserProps {
+  reason: string;
+  navigateToLogin: () => void;
+}
+
+export interface AlertServerErrorProps {
+  reason: string;
+  navigateToLogin: () => void;
+}

@@ -1,12 +1,14 @@
-import React, { ReactNode } from 'react';
-import { AppProps } from 'next/app'; // Import types from Next.js
+import React from 'react';
+import { AppProps } from 'next/app'; 
 import { UserProvider } from "../context/userContext";
 import "../styles/globals.css";
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
       <Component {...pageProps} />
     </UserProvider>
   );
 }
+
+export default App;

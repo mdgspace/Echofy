@@ -1,11 +1,12 @@
 "use client";
+import { DataFromServer, Message, ProcessWebSocketMessageProps } from "../../interface/interface";
 import alertBannedUser from "../alerts/alertBannedUser";
 
 export default function processWebSocketMessage(
-    event,
+    {event,
     setMessages,
     navigateToLogin,
-    isChatbot,
+    isChatbot,}:ProcessWebSocketMessageProps
   ) {
     if (isChatbot) {
       const userIdRegex = /\buserID\b/; 
@@ -36,25 +37,23 @@ export default function processWebSocketMessage(
       console.error("Error parsing or handling the message:", error);
     }
   
-    function handleUserID(data) {
+    function handleUserID(data: DataFromServer) {
       if (data.userID) {
-        sessionStorage.setItem("userID", data.userID);
+          sessionStorage.setItem("userID", data.userID);
       }
-    }
-  
-    function handleBannedUser(data, navigateToLogin) {
+  }
+
+  function handleBannedUser(data: DataFromServer, navigateToLogin: () => void) {
       if (data.Message && data.Message === "You are banned now") {
-        alertBannedUser(data.Message,navigateToLogin);
-        navigateToLogin();
-        return true;
+        alertBannedUser(data.Message?);
+          navigateToLogin();
+          return true;
       }
       return false;
-    }
-  
-    function handleDeleteMessage(data, setMessages) {
-      const deleteTimestamp = parseFloat(data.Delete);
-      setMessages((prevMessages) =>
-        prevMessages.filter((message) => message.timestamp !== deleteTimestamp),
-      );
-    }
   }
+
+  function handleDeleteMessage(data: DataFromServer, setMessages: React.Dispatch<React.SetStateAction<Message[]>>) {
+      const deleteTimestamp = parseFloat(data.Delete!);
+      setMessages((prevMessages) => prevMessages.filter((message) => message.timestamp !== deleteTimestamp));
+  }
+}

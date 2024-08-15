@@ -1,13 +1,10 @@
 import React, { createContext, useState, ReactNode } from "react";
+import { UserContextType, UserProviderProps } from "../interface/interface";
 
-// Define UserContext type (recommended for better type safety)
-interface UserContextType {
-  userName: string | null;
-  setUserName: React.Dispatch<React.SetStateAction<string | null>>;
-}
+
 export const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [userName, setUserName] = useState<string | null>(null);
 
   return (

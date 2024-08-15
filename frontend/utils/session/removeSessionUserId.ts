@@ -1,5 +1,5 @@
 "use client";
 
-export default function removeSessionUserId() {
+export default function removeSessionUserId():void {
     sessionStorage.removeItem("userID");
   }

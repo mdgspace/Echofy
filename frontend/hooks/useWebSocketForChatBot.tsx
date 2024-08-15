@@ -8,8 +8,9 @@ import { handleWebSocketError } from "../utils/websocket/handleWebSocketError";
 import processWebSocketMessage from "../utils/websocket/processWebSocketMessage";
 import { buildWebSocketURL } from "../services/url-builder/url-builder";
 import { initializeWebSocketConnection } from "../services/api/api";
+import { useWebsocketForChatbotProps } from "../interface/interface";
 
-const useWebsocketForChatbot=(socketRef,setMessages,router)=>{
+const useWebsocketForChatbot=({socketRef,setMessages,router}:useWebsocketForChatbotProps)=>{
     useEffect(() => {
         const username = getSessionUser();
         if (!username || username === "null" || username === "undefined") {

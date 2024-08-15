@@ -1,4 +1,4 @@
-export function buildWebSocketURL(userId, username, channel, topic) {
+export function buildWebSocketURL(userId, username, channel, topic?) {
   const host = process.env.NEXT_PUBLIC_BACKEND_HOST;
   const port = process.env.NEXT_PUBLIC_BACKEND_PORT;
   const protocol =

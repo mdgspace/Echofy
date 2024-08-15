@@ -14,18 +14,23 @@ import alertAbnormalClose from "../alerts/alertAbnormalClose";
 
 export default function handleWebSocketClose(event, navigateToLogin) {
     if (isUserBanned(event.code)) {
-      alertBannedUser(event.reason, navigateToLogin);
+      alertBannedUser(event.reason);
+      navigateToLogin();
     }
     if (isSameUsername(event.code)) {
-      alertSameUsername(event.reason, navigateToLogin);
+      alertSameUsername(event.reason);
+      navigateToLogin();
     }
     if (isBadRequest(event.code)) {
-      alertBadRequest(event.reason, navigateToLogin);
+      alertBadRequest(event.reason);
+      navigateToLogin();
     }
     if (isServerError(event.code)) {
-      alertServerError(event.reason, navigateToLogin);
+      alertServerError(event.reason);
+      navigateToLogin();
     }
     if (isAbnormalClose(event.code)) {
-      alertAbnormalClose(event.reason, navigateToLogin);
+      alertAbnormalClose(event.reason);
+      navigateToLogin();
     }
   }
