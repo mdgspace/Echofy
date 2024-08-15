@@ -3,7 +3,7 @@ import { DataFromServer, Message, ProcessWebSocketMessageProps } from "../../int
 import alertBannedUser from "../alerts/alertBannedUser";
 
 export default function processWebSocketMessage(
-{ event, setMessages, navigateToLogin, isChatbot }: ProcessWebSocketMessageProps, p1: boolean  ) {
+{ event, setMessages, navigateToLogin, isChatbot }: ProcessWebSocketMessageProps) {
     if (isChatbot) {
       const userIdRegex = /\buserID\b/; 
       if (userIdRegex.test(event.data)) {
