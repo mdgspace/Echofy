@@ -18,20 +18,15 @@ import Avatar14 from "../../assets/avatars/avatar_14.svg";
 import Avatar15 from "../../assets/avatars/avatar_15.svg";
 import parseMessageText from "../../utils/chatbot_formatting/parseMessageText";
 import getAvatar from "../../utils/session/getAvatar";
+import { Message } from "../../types";
 
-// Define Interfaces
-interface Message {
-  isSent: boolean;
-  username: string;
-  text: string;
-  // Add more properties as needed (e.g., timestamp, id, etc.)
+
+interface ChatbotContainerProps {
+  messages: Message[];
+  messagesEndRef: React.MutableRefObject<HTMLDivElement | null>;
 }
 
-interface MessageData {
-  userID?: string; // Optional property for chatbot messages
-}
-
-export default function ChatContainer({ messages, messagesEndRef }) {
+export default function ChatContainer({ messages, messagesEndRef }:ChatbotContainerProps) {
   const [filteredMessage, setFilteredMessage] = useState([]);
 
   const AvatarList = [

@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { MutableRefObject, useEffect} from "react";
 import getSessionUser from "../utils/session/getSessionUser";
 import getSessionUserId from "../utils/session/getSessionUserId";
 import handleWebSocketClose from "../utils/websocket/handleWebSocketClose";
@@ -7,8 +7,26 @@ import processWebSocketMessage from "../utils/websocket/processWebSocketMessage"
 import { buildWebSocketURL } from "../services/url-builder/url-builder";
 import { initializeWebSocketConnection } from "../services/api/api";
 import playSound from "../utils/playSound";
+import { Message } from "../types";
+import { NextRouter } from "next/router";
 
-const useWebsocket=(soundEnabled,channel,socketRef,setMessages,router,setUnreadCount)=>{
+interface UseWebSocketProps {
+  soundEnabled: boolean,
+  channel: string,
+  socketRef: MutableRefObject<WebSocket | null>,
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
+  router: NextRouter,
+  setUnreadCount: React.Dispatch<React.SetStateAction<number>>
+}
+
+const useWebsocket=({
+  soundEnabled,
+  channel,
+  socketRef,
+  setMessages,
+  router,
+  setUnreadCount,
+}: UseWebSocketProps)=>{
     useEffect(() => {
         const username = getSessionUser();
         if (!username || username === "null" || username === "undefined") {
@@ -40,7 +58,7 @@ const useWebsocket=(soundEnabled,channel,socketRef,setMessages,router,setUnreadC
     
         socket.addEventListener("message", (event) => {
           try {
-            let data = "";
+            let data:any = "";
             if (
               event.data != "Message send successful" &&
               event.data != "Welcome to MDG Chat!"

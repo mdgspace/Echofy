@@ -19,14 +19,10 @@ import Avatar13 from "../../assets/avatars/avatar_13.svg";
 import Avatar14 from "../../assets/avatars/avatar_14.svg";
 import Avatar15 from "../../assets/avatars/avatar_15.svg";
 import getAvatar from "../../utils/session/getAvatar";
+import { Message } from "../../types";
 
-interface Message {
-  isSent: boolean;
-  avatar?: string; 
-  username: string;
-  text: string;
-  timestamp: number;
-}
+
+
 
 interface ChatContainerProps {
   messages: Message[];

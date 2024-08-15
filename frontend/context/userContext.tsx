@@ -1,6 +1,5 @@
 import React, { createContext, useState, ReactNode } from "react";
 
-// Define UserContext type (recommended for better type safety)
 interface UserContextType {
   userName: string | null;
   setUserName: React.Dispatch<React.SetStateAction<string | null>>;

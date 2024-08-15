@@ -10,14 +10,9 @@ import useSettings from "../hooks/useSettings";
 import useWebsocket from "../hooks/useWebsocket";
 import useLeaveChat from "../hooks/useLeaveChat";
 import useVisibilityChange from "../hooks/useVisibilityChange";
+import { Message } from "../types";
 
-interface UseLoadSettingHook {
-  (setSoundEnabled: (enabled: boolean) => void, setNotificationsEnabled: (enabled: boolean) => void): void;
-}
 
-interface UseSettingsHook {
-  (soundEnabled: boolean, notificationsEnabled: boolean): void;
-}
 
 interface UseWebsocketHook {
   (
@@ -49,24 +44,7 @@ interface ChatInputBoxProps {
   socketRef: React.MutableRefObject<WebSocket | null>;
 }
 
-// For Box (implied)
-interface BoxProps {
-  channel: string;
-}
 
-// For Navbar (implied)
-interface NavbarProps {
-  currentPage: string;
-  currentTopic?: string; 
-}
-
-interface Message {
-  avatar?: string;
-  username: string;
-  text: string;
-  timestamp: number;
-  isSent: boolean;
-}
 
 export default function Home(){
   const [messages, setMessages] = useState<Message[]>([]);
@@ -80,9 +58,9 @@ export default function Home(){
 
   useLoadSetting(setSoundEnabled,setNotificationsEnabled);
   useSettings(soundEnabled,notificationsEnabled);
-  useWebsocket(soundEnabled,channel,socketRef,setMessages,router,setUnreadCount)
+  useWebsocket({soundEnabled,channel,socketRef,setMessages,router,setUnreadCount})
   useLeaveChat(router);
-  useVisibilityChange(setUnreadCount);
+  useVisibilityChange({setUnreadCount});
 
   useEffect(() => {}, [messages]);
 

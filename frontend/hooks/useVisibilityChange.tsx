@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+interface UseVisibilityChangeProps {
+  setUnreadCount: React.Dispatch<React.SetStateAction<number>>;
+}
 
-const useVisibilityChange=(setUnreadCount)=>{
+const useVisibilityChange=({setUnreadCount}:UseVisibilityChangeProps)=>{
     useEffect(() => {
         const handleVisibilityChange = () => {
           if (!document.hidden) {

@@ -9,6 +9,7 @@ import processWebSocketMessage from "../utils/websocket/processWebSocketMessage"
 import { buildWebSocketURL } from "../services/url-builder/url-builder";
 import { initializeWebSocketConnection } from "../services/api/api";
 
+
 const useWebsocketForChatbot=(socketRef,setMessages,router)=>{
     useEffect(() => {
         const username = getSessionUser();

@@ -5,7 +5,7 @@ import getSessionUserId from "../../utils/session/getSessionUserId";
 import setSessionUser from "../../utils/session/setSessionUser";
 import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
-import { toast } from "react-toastify"; // Assuming you're using react-toastify
+
 interface LoginModalProps {
   onClose: () => void;
   redirect: string;
@@ -48,7 +48,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
 
   const handleChatWithUsClick = async () => {
     if (!username.trim()) {
-      toast.error("Please enter a username.");
+      console.error("Please enter a username.");
       return;
     }
 

@@ -10,12 +10,8 @@ import useSettings from "../hooks/useSettings";
 import useWebsocketForChatbot from "../hooks/useWebSocketForChatBot";
 import useVisibilityChange from "../hooks/useVisibilityChange";
 import useLeaveChat from "../hooks/useLeaveChat";
-interface Message {
-  text: string; // The content of the message
-  sender: 'user' | 'chatbot'; // Who sent the message
-  timestamp?: Date; // Optional timestamp (if you want to display it)
-  // ... other properties as needed (e.g., message ID, attachments, etc.)
-}
+import { Message } from "../types";
+
 interface UseLoadSettingHook {
   (setSoundEnabled: (enabled: boolean) => void, setNotificationsEnabled: (enabled: boolean) => void): void;
 }
@@ -48,19 +44,19 @@ interface ChatbotContainerProps {
 
 
 export default function Home() {
-  const [messages, setMessages] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [soundEnabled, setSoundEnabled] = useState(true);
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(true);
   const [topic, setTopic] = useState<string>("Appetizer");
   const router = useRouter();
-  const socketRef = useRef(null);
-  const messagesEndRef = useRef(null);
+  const socketRef = useRef<WebSocket | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useLoadSetting(setSoundEnabled,setNotificationsEnabled);
   useSettings(soundEnabled,notificationsEnabled);
   useWebsocketForChatbot(socketRef,setMessages,router);
-  useVisibilityChange(setUnreadCount);
+  useVisibilityChange({setUnreadCount});
   // useLeaveChat(router);
 
   useEffect(() => setTopic(router.query.topic as string ?? "Appetizer"), [router.query]); 

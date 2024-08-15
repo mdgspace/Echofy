@@ -1,12 +1,6 @@
+import { Project } from "../../types";
 import { ProjectCard } from "./projectCard";
-interface Project {
-  Name: string;
-  ShortDesc: string;
-  ImageLink: string;
-  GithubLink?: string;
-  PlayStoreLink?: string;
-  AppStoreLink?: string;
-}
+
 interface ProjectListProps {
   projects: Project[];
   category: string;

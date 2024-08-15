@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { fetchProjects } from "../services/api/projectsApi";
+import { Project } from "../types";
 
 // Define Interfaces
 interface TopicDropdownProps {
@@ -9,20 +10,11 @@ interface TopicDropdownProps {
   login: boolean;
 }
 
-interface Project {
-  Category: string;
-  Name: string;
-  ShortDesc: string;
-  LongDesc: string;
-  ImageLink: string;
-  AppStoreLink: string;
-  GithubLink: string;
-  PlayStoreLink: string;
-}
+
 
 export const TopicDropdown: React.FC<TopicDropdownProps> = ({ topic, setTopic, login }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
   const projectList = projects.filter((project) => project.Category === "Projects");
