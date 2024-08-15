@@ -7,14 +7,7 @@ import {
   MdClose,
   MdAudiotrack,
 } from "react-icons/md";
-
-interface SettingsPopupProps {
-  onClose: () => void;
-  soundEnabled: boolean;
-  setSoundEnabled: (enabled: boolean) => void;
-  notificationsEnabled: boolean;
-  setNotificationsEnabled: (enabled: boolean) => void;
-}
+import { SettingsPopupProps } from "../interface/interface";
 
 
 const SettingsPopup = ({

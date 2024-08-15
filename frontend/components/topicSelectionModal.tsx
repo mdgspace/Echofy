@@ -1,8 +1,6 @@
 import React from "react";
+import { TopicSelectionModalProps } from "../interface/interface";
 
-interface TopicSelectionModalProps {
-  onClose: () => void;
-}
 
 const TopicSelectionModal: React.FC<TopicSelectionModalProps> = ({ onClose }) => {
   return (

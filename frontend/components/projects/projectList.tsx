@@ -1,17 +1,6 @@
+import { ProjectListProps } from "../../interface/interface";
 import { ProjectCard } from "./projectCard";
-interface Project {
-  Name: string;
-  ShortDesc: string;
-  ImageLink: string;
-  GithubLink?: string;
-  PlayStoreLink?: string;
-  AppStoreLink?: string;
-}
-interface ProjectListProps {
-  projects: Project[];
-  category: string;
-  heightDecrease?: boolean;
-}
+
 
 export const ProjectList : React.FC<ProjectListProps> = ({ projects, category, heightDecrease }) => {
   return (

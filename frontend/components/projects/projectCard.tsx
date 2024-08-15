@@ -3,15 +3,9 @@ import ps from "../../assets/Playstore.svg";
 import as from "../../assets/Apple_logo_grey.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { ProjectCardProps } from "../../interface/interface";
 
-interface ProjectCardProps {
-  name: string;
-  shortDesc: string;
-  ImageLink: string;
-  Github?: string;
-  PlayStore?: string;
-  AppStore?: string;
-}
+
 
 export const ProjectCard : React.FC<ProjectCardProps> = ({
   name,

@@ -4,10 +4,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { fetchProjects } from "../services/api/projectsApi";
 import { ProjectList } from "./projects/projectList";
+import { BoxProps } from "../interface/interface";
 
-interface BoxProps {
-  channel?: string;
-}
+
 
 export default function Box({ channel }: BoxProps) {
   const router = useRouter();

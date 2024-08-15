@@ -5,11 +5,9 @@ import Image from "next/image";
 import jinoraLogo from "../assets/logo.svg";
 import slack from ".././assets/slack_blue.svg";
 import { TopicDropdown } from "./topicDropdown";
+import { NavbarProps } from "../interface/interface";
 
-interface NavbarProps{
-  currentPage: string;
-  currentTopic:string;
-}
+
 
 export const Navbar = ({ currentPage, currentTopic }: NavbarProps) => {
   const [isMailOpen, setIsMailOpen] = useState<boolean>(false);

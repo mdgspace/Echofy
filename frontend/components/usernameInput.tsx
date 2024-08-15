@@ -1,9 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
+import { UsernameInputProps } from '../interface/interface';
 
-interface UsernameInputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
 
 const UsernameInput: React.FC<UsernameInputProps> = ({ value, onChange }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

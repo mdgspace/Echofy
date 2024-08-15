@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { ModalProps } from "../interface/interface";
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children }:ModalProps) {
   const router = useRouter();
 
   useEffect(() => {

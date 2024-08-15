@@ -1,24 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { fetchProjects } from "../services/api/projectsApi";
-
-// Define Interfaces
-interface TopicDropdownProps {
-  topic: string;
-  setTopic: (topic: string) => void;
-  login: boolean;
-}
-
-interface Project {
-  Category: string;
-  Name: string;
-  ShortDesc: string;
-  LongDesc: string;
-  ImageLink: string;
-  AppStoreLink: string;
-  GithubLink: string;
-  PlayStoreLink: string;
-}
+import { Project,TopicDropdownProps} from "../interface/interface";
 
 export const TopicDropdown: React.FC<TopicDropdownProps> = ({ topic, setTopic, login }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);

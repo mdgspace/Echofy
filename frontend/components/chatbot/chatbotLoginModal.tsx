@@ -6,12 +6,9 @@ import setSessionUser from "../../utils/session/setSessionUser";
 import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
 import { TopicDropdown } from "../topicDropdown";
+import { ChatBotLoginModalProps, Topic } from "../../interface/interface";
 
-// Define Interfaces
-interface ChatBotLoginModalProps {
-  onClose: () => void; // Function to close the modal
-}
-type Topic = "SELECT A TOPIC" | "Option 1" | "Option 2" | string ;
+
 const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const [username, setUsername] = useState("");

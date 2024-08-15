@@ -3,13 +3,10 @@ import { useState } from "react";
 import subscribe from "../services/api/subscribeApi";
 import getSessionUser from "../utils/session/getSessionUser";
 import getSessionUserId from "../utils/session/getSessionUserId";
+import { MailProps } from "../interface/interface";
 
 
-interface MailProps{
-  isOpen?:boolean;
-  onClose: () => void;
-  channel: string;
-}
+
 export default function Mail({
   isOpen,
   onClose,
