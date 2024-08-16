@@ -3,7 +3,7 @@ import { DataFromServer, Message, ProcessWebSocketMessageProps } from "../../int
 import alertBannedUser from "../alerts/alertBannedUser";
 
 export default function processWebSocketMessage(
-{ event, setMessages, navigateToLogin, isChatbot }: ProcessWebSocketMessageProps, p1: boolean  ) {
+{ event, setMessages, navigateToLogin, isChatbot }: ProcessWebSocketMessageProps) {
     if (isChatbot) {
       const userIdRegex = /\buserID\b/; 
       if (userIdRegex.test(event.data)) {
@@ -41,7 +41,7 @@ export default function processWebSocketMessage(
 
   function handleBannedUser(data: DataFromServer, navigateToLogin: () => void) {
       if (data.Message && data.Message === "You are banned now") {
-        alertBannedUser(data.Message?);
+        alertBannedUser(data.Message,navigateToLogin);
           navigateToLogin();
           return true;
       }

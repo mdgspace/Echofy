@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { MutableRefObject, useEffect} from "react";
 import getSessionUser from "../utils/session/getSessionUser";
 import getSessionUserId from "../utils/session/getSessionUserId";
 import handleWebSocketClose from "../utils/websocket/handleWebSocketClose";
@@ -7,14 +7,26 @@ import processWebSocketMessage from "../utils/websocket/processWebSocketMessage"
 import { buildWebSocketURL } from "../services/url-builder/url-builder";
 import { initializeWebSocketConnection } from "../services/api/api";
 import playSound from "../utils/playSound";
-import { UseWebsocketProps, Message } from "../interface/interface";
+import { Message } from "../interface/interface"
+import { NextRouter } from "next/router";
 
-interface MessageData {
-  [timestamp: string]: string; 
+interface UseWebSocketProps {
+  soundEnabled: boolean,
+  channel: string,
+  socketRef: MutableRefObject<WebSocket | null>,
+  setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
+  router: NextRouter,
+  setUnreadCount: React.Dispatch<React.SetStateAction<number>>
 }
 
-
-const useWebsocket=({soundEnabled,channel,socketRef,setMessages,router,setUnreadCount}:UseWebsocketProps)=>{
+const useWebsocket=({
+  soundEnabled,
+  channel,
+  socketRef,
+  setMessages,
+  router,
+  setUnreadCount,
+}: UseWebSocketProps)=>{
     useEffect(() => {
         const username = getSessionUser();
         if (!username || username === "null" || username === "undefined") {
@@ -27,11 +39,11 @@ const useWebsocket=({soundEnabled,channel,socketRef,setMessages,router,setUnread
         };
         const handleMessage = (event) =>
           processWebSocketMessage(
-            event,
+           { event,
             setMessages,
-            () => router.push("/"),
-            false,
-          );
+            navigateToLogin:() => router.push("/"),
+            isChatbot:false,
+          });
         const handleClose = (event) =>
           handleWebSocketClose(event, () => router.push("/"));
         const handleError = handleWebSocketError;
@@ -46,7 +58,7 @@ const useWebsocket=({soundEnabled,channel,socketRef,setMessages,router,setUnread
     
         socket.addEventListener("message", (event) => {
           try {
-            let data = "";
+            let data:any = "";
             if (
               event.data != "Message send successful" &&
               event.data != "Welcome to MDG Chat!"
@@ -79,16 +91,16 @@ const useWebsocket=({soundEnabled,channel,socketRef,setMessages,router,setUnread
               allMessages.sort((a, b) => a.timestamp - b.timestamp);
               setMessages(allMessages);
             } else {
-              if (event.data.text && event.data.sender && event.data.timestamp) {
-                let isSent = event.data.sender === username;
+              if (data.text && data.sender && data.timestamp) {
+                let isSent = data.sender === username;
                 setMessages((prevMessages) => [
                   ...prevMessages,
                   {
-                    text: event.data.text,
+                    text: data.text,
                     isSent: isSent,
-                    username: event.data.sender,
-                    timestamp: parseFloat(event.data.timestamp),
-                    avatar: event.data.url,
+                    username: data.sender,
+                    timestamp: parseFloat(data.timestamp),
+                    avatar: data.url,
                   },
                 ]);
                 if (soundEnabled) playSound(isSent);

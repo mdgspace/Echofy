@@ -32,7 +32,7 @@ const useWebsocketForChatbot=({socketRef,setMessages,router}:useWebsocketForChat
           //todo-> toast connected to server
         };
         const handleMessage = (event) =>
-          processWebSocketMessage(event, setMessages, () => router.push("/"), true);
+          processWebSocketMessage({event, setMessages, navigateToLogin:() => router.push("/"), isChatbot:true});
         const handleClose = (event) =>
           handleWebSocketClose(event, () => router.push("/"));
         const handleError = handleWebSocketError;

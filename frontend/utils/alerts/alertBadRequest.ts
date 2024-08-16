@@ -1,8 +1,9 @@
 "use client";
 import Swal from "sweetalert2";
-import { AlertAbnormalCloseProps, AlertBadRequestProps } from "../../interface/interface";
 
-export default function alertBadRequest({reason, navigateToLogin}:AlertBadRequestProps) {
+
+export default function alertBadRequest(reason: string,
+  navigateToLogin: () => void) {
     try {
       Swal.fire({
         title: "Bad request",
