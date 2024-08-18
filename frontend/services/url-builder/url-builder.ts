@@ -1,6 +1,6 @@
-export function buildWebSocketURL(userId, username, channel, topic?) {
-  const host = process.env.NEXT_PUBLIC_BACKEND_HOST;
-  const port = process.env.NEXT_PUBLIC_BACKEND_PORT;
+export function buildWebSocketURL(userId:string, username:string, channel:string, topic?:string) {
+  const host: string = process.env.NEXT_PUBLIC_BACKEND_HOST || 'localhost';
+  const port: string = process.env.NEXT_PUBLIC_BACKEND_PORT || '443';
   const protocol =
     process.env.NEXT_PUBLIC_BACKEND_ENVIRONMENT === "development"
       ? "ws"

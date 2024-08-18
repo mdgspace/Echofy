@@ -207,3 +207,20 @@ export interface AlertServerErrorProps {
   reason: string;
   navigateToLogin: () => void;
 }
+
+export interface WebSocketURLParams {
+  userId: string;
+  username: string;
+  channel: string;
+  topic?: string;
+}
+
+export interface URLBuilderParams {
+  host: string;
+  port: string;
+  protocol: string;
+}
+
+export interface LeaveChatURLParams {
+  userID: string;
+}

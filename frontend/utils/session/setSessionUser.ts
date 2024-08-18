@@ -1,5 +1,5 @@
 "use client";
 
-export default function setSessionUser(username: string) {
+export default function setSessionUser(username) {
     sessionStorage.setItem("username", username);
   }

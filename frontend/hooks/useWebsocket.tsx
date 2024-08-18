@@ -38,12 +38,12 @@ const useWebsocket=({
           //todo-> toast connected to server
         };
         const handleMessage = (event) =>
-          processWebSocketMessage(
-           { event,
+          processWebSocketMessage({
+            event,
             setMessages,
             navigateToLogin:() => router.push("/"),
-            isChatbot:false,
-          });
+            isChatbot:false,}
+          );
         const handleClose = (event) =>
           handleWebSocketClose(event, () => router.push("/"));
         const handleError = handleWebSocketError;
