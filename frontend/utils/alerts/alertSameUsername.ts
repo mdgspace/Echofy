@@ -1,8 +1,9 @@
 "use client";
 import Swal from "sweetalert2";
-import { AlertSameUserProps } from "../../interface/interface";
 
-export default function alertSameUsername({ reason, navigateToLogin }: AlertSameUserProps) {
+
+export default function alertSameUsername( reason: string,
+  navigateToLogin: () => void ) {
     try {
       Swal.fire({
         title: "Username already exists",

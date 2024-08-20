@@ -25,9 +25,9 @@ export default function Home(){
 
   useLoadSetting(setSoundEnabled,setNotificationsEnabled);
   useSettings(soundEnabled,notificationsEnabled);
-  useWebsocket(soundEnabled,channel,socketRef,setMessages,router,setUnreadCount)
+  useWebsocket({soundEnabled,channel,socketRef,setMessages,router,setUnreadCount})
   useLeaveChat(router);
-  useVisibilityChange(setUnreadCount);
+  useVisibilityChange({setUnreadCount});
 
   useEffect(() => {}, [messages]);
 

@@ -41,7 +41,7 @@ export default function processWebSocketMessage(
 
   function handleBannedUser(data: DataFromServer, navigateToLogin: () => void) {
       if (data.Message && data.Message === "You are banned now") {
-        alertBannedUser(data.Message?);
+        alertBannedUser(data.Message,navigateToLogin);
           navigateToLogin();
           return true;
       }

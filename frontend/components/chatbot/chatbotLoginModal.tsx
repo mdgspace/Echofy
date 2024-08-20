@@ -5,27 +5,16 @@ import getSessionUserId from "../../utils/session/getSessionUserId";
 import setSessionUser from "../../utils/session/setSessionUser";
 import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
-import { TopicDropdown } from "../topicDropdown";
-import { ChatBotLoginModalProps, Topic } from "../../interface/interface";
 
+interface LoginModalProps {
+  onClose: () => void;
+  redirect: string;
+}
 
-const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
-  const popupRef = useRef<HTMLDivElement | null>(null);
-  const [username, setUsername] = useState("");
-  const [topic, setTopic] = useState<Topic>("SELECT A TOPIC"); 
+const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
+  const popupRef = useRef<HTMLDivElement>(null);
+  const [username, setUsername] = useState<string>("");
   const router = useRouter();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown",   
- handleClickOutside);
-  }, [popupRef,   
- onClose]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -37,13 +26,26 @@ const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
+
   const handleChatWithUsClick = async () => {
+    const chatType = redirect;
     const currentUser = getSessionUser();
     const currentUserId = getSessionUserId();
-
+    const query = { channel: chatType };
+  
     if (currentUser && currentUserId) {
       if (currentUser === username) {
-        router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
+        router.push(`/chat?${new URLSearchParams(query).toString()}`);
       } else {
         const hasChanged = await checkAndPromptSessionChange(
           currentUser,
@@ -51,18 +53,19 @@ const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
           () => {
             removeSessionUserId();
             setSessionUser(username);
-          }
+          },
         );
-
         if (hasChanged) {
-          router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
+          router.push(`/chat?${new URLSearchParams(query).toString()}`);
         }
       }
     } else {
       setSessionUser(username);
-      router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
+      router.push(`/chat?${new URLSearchParams(query).toString()}`);
     }
   };
+  
+
   return (
     <div className="fixed inset-0 bg-opacity-50 bg-bg-gray flex justify-center items-center backdrop-blur">
       <div
@@ -73,7 +76,6 @@ const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
           <div className="w-60 text-center text-md">
             Pick your username and login
           </div>
-
           <div className="rounded-xl text-[#49454F] w-60 flex justify-center items-center">
             <input
               type="text"
@@ -84,16 +86,16 @@ const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
               onKeyDown={handleEnterClick}
             />
           </div>
-          <TopicDropdown topic={topic} setTopic={setTopic} login={true}/>
           <div
             className="rounded-full bg-customBlue text-white text-Lato p-2 max-sm:text-xs text-center w-60 rounded-[12.5rem] text-md"
             onClick={handleChatWithUsClick}
           >
-            START ASKING
+            CHAT WITH US
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default ChatBotLoginModal;
+
+export default LoginModal;

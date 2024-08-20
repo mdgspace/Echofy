@@ -59,7 +59,7 @@ export default function ChatContainer({ messages, messagesEndRef }:ChatContainer
     const filterMessages = () => {
       const newMessages = messages.filter((message) => {
         try {
-          message = JSON.parse(message);
+          // message = JSON.parse(message);
           const messageData = JSON.parse(message.text);
           return !(
             messageData.userID && messageData.userID.startsWith("chatbot")

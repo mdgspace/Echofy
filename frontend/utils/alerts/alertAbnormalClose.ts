@@ -1,11 +1,11 @@
 "use client";
 import Swal from 'sweetalert2';
 import { Dispatch, SetStateAction } from 'react'; // Import types for state setters
-import { AlertAbnormalCloseProps } from '../../interface/interface';
 
 
 
-export default async function alertAbnormalClose({reason, navigateToLogin}:AlertAbnormalCloseProps){
+export default async function alertAbnormalClose(reason: string,
+  navigateToLogin: () => void){
     try {
       const result = await Swal.fire({
         title: "Connection lost",

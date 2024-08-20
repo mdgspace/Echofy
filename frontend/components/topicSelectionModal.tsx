@@ -13,7 +13,7 @@ const TopicSelectionModal: React.FC<TopicSelectionModalProps> = ({ onClose }) =>
         >
           Close
         </button>
-      </div>
+      </div>  
     </div>
   );
 };

@@ -88,17 +88,6 @@ export interface MailProps {
     onClose: () => void; // Function to close the modal
   }
   export type Topic = "SELECT A TOPIC" | "Option 1" | "Option 2" | string ;
-
-  export interface ChatContainerProps {
-    messages: string[]; // Assuming messages are serialized JSON strings
-    messagesEndRef: React.RefObject<HTMLDivElement>; // Ref to scroll to the bottom
-  }
-  
-  export interface Message {
-    isSent: boolean;
-    username: string;
-    text: string; // Can contain JSON data in some cases
-  }
   
   export interface Message {
     isSent: boolean;
@@ -107,6 +96,14 @@ export interface MailProps {
     text: string;
     timestamp: number;
   }
+  export interface ChatContainerProps {
+    messages: Message[]; // Assuming messages are serialized JSON strings
+    messagesEndRef: React.RefObject<HTMLDivElement>; // Ref to scroll to the bottom
+  }
+  
+
+  
+
 
   export interface UserContextType {
     userName: string | null;
@@ -189,15 +186,9 @@ export interface DataFromServer {
   Delete?: string;
 }
 
-export interface AlertAbnormalCloseProps {
-  reason: string;
-  navigateToLogin: () => void; // Function to navigate (e.g., from useRouter)
-}
 
-export interface AlertBadRequestProps {
-  reason: string;
-  navigateToLogin: () => void; // Function to navigate (e.g., from useRouter)
-}
+
+
 
 export interface WebSocketHandlers {
   onOpen: (event: Event) => void;
@@ -206,10 +197,7 @@ export interface WebSocketHandlers {
   onError: (event: Event) => void;
 }
 
-export interface AlertBannedUserProps {
-  reason: string;
-  navigateToLogin: () => void;
-}
+
 export interface AlertSameUserProps {
   reason: string;
   navigateToLogin: () => void;
@@ -218,4 +206,21 @@ export interface AlertSameUserProps {
 export interface AlertServerErrorProps {
   reason: string;
   navigateToLogin: () => void;
+}
+
+export interface WebSocketURLParams {
+  userId: string;
+  username: string;
+  channel: string;
+  topic?: string;
+}
+
+export interface URLBuilderParams {
+  host: string;
+  port: string;
+  protocol: string;
+}
+
+export interface LeaveChatURLParams {
+  userID: string;
 }
