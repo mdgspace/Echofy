@@ -1,6 +1,6 @@
-export function buildWebSocketURL(userId:string, username:string, channel:string, topic?:string) {
-  const host: string = process.env.NEXT_PUBLIC_BACKEND_HOST || 'localhost';
-  const port: string = process.env.NEXT_PUBLIC_BACKEND_PORT || '1323';
+export function buildWebSocketURL(userId: string | null, username: string, channel?: string, topic?: string): string {
+  const host = process.env.NEXT_PUBLIC_BACKEND_HOST || "localhost";
+  const port = process.env.NEXT_PUBLIC_BACKEND_PORT || 1323;
   const protocol =
     process.env.NEXT_PUBLIC_BACKEND_ENVIRONMENT === "development"
       ? "ws"
@@ -10,12 +10,12 @@ export function buildWebSocketURL(userId:string, username:string, channel:string
     channel: channel || "public",
     name: username,
     userID: userId || "0",
-    topic: topic || null,
+    topic: topic || '',
   });
   return `${baseUrl}?${params.toString()}`;
 }
 
-export function projectURLbuildr() {
+export function projectURLbuildr(): string {
   const host = process.env.NEXT_PUBLIC_BACKEND_HOST;
   const port = process.env.NEXT_PUBLIC_BACKEND_PORT;
   const protocol =
@@ -26,7 +26,7 @@ export function projectURLbuildr() {
   return baseUrl;
 }
 
-export function leaveChatURLbuildr(userID) {
+export function leaveChatURLbuildr(userID: string): string {
   const host = process.env.NEXT_PUBLIC_BACKEND_HOST;
   const port = process.env.NEXT_PUBLIC_BACKEND_PORT;
   const protocol =
@@ -41,7 +41,7 @@ export function leaveChatURLbuildr(userID) {
   return `${baseUrl}?${params.toString()}`;
 }
 
-export function subscribeURLbuildr() {
+export function subscribeURLbuildr(): string {
   const host = process.env.NEXT_PUBLIC_BACKEND_HOST;
   const port = process.env.NEXT_PUBLIC_BACKEND_PORT;
   const protocol =

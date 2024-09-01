@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Avatar1 from "../../assets/avatars/avatar_1.svg";
 import Avatar2 from "../../assets/avatars/avatar_2.svg";
 import Avatar3 from "../../assets/avatars/avatar_3.svg";
-import Avatar4 from "../../assets/avatars/avatar_4.svg";
+import Avatar4 from "../../assets/avatars/avatar_4.svg";``
 import Avatar5 from "../../assets/avatars/avatar_5.svg";
 import Avatar6 from "../../assets/avatars/avatar_6.svg";
 import Avatar7 from "../../assets/avatars/avatar_7.svg";
@@ -58,7 +58,44 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ messages, messagesEndRef 
               message.isSent ? "justify-end" : "justify-start"
             } mb-4 mx-6`}
           >
-            {/* ... (rest of the message rendering code is the same as before) */}
+            <div
+              className={`relative flex font-Lato text-base ${message.isSent ? "flex-row-reverse" : ""}`}
+            >
+              <div className="flex flex-col">
+                <div
+                  className={`flex flex-row gap-2 items-center ${message.isSent ? "flex-row-reverse" : ""}`}
+                >
+                  <div className="flex-shrink-0 w-12 h-12">
+                    <Image
+                      src={message.avatar || Avatar}
+                      width="48"
+                      height="48"
+                      alt=""
+                      className="rounded-full"
+                    />
+                  </div>
+                  <div className="text-txt-mdg-username">
+                    {message.username}
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <div
+                    className={`w-[max-content] min-w-[4vw] max-w-[50vw] px-4 py-2 mx-2   ${
+                      message.isSent
+                        ? "bg-customBlue text-white rounded-l-[32px] rounded-br-[32px] mr-6"
+                        : " bg-white  text-semiblack rounded-r-[32px] rounded-bl-[32px] ml-12"
+                    } break-words`}
+                  >
+                    <div className="py-2">{message.text}</div>
+                  </div>
+                  <div
+                    className={`text-xs text-bg-gray w-[95%] mt-2 flex ${message.isSent ? "justify-start ml-6" : "justify-end"}`}
+                  >
+                    {formatTime(message.timestamp)}
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
