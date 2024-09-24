@@ -1,8 +1,8 @@
 "use client";
 import Swal from "sweetalert2";
-
-const alertBannedUser = async (reason: string,
-  navigateToLogin: () => void)=> {
+import {NavigateFunction , AlertBannedUser } from "../../interface/interface";
+import { navigateToLogin } from "../websocket/handleWebSocketClose";
+const alertBannedUser: AlertBannedUser = (reason, navigate) => {
     try {
       Swal.fire({
         title: "You have been banned",

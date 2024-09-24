@@ -1,9 +1,8 @@
 "use client";
 import Swal from "sweetalert2";
-
-
-export default function alertServerError(reason: string,
-  navigateToLogin: () => void) {
+import { AlertServerErrorProps } from "../../interface/interface";
+import { navigateToLogin } from "../websocket/handleWebSocketClose";
+const alertServerError: AlertServerErrorProps = (reason, navigate) => {
     try {
       Swal.fire({
         title: "Server error",
@@ -23,3 +22,5 @@ export default function alertServerError(reason: string,
       });
     } catch (error) {}
   }
+
+  export default alertServerError;

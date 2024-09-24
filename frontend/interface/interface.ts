@@ -204,15 +204,9 @@ export interface WebSocketHandlers {
 }
 
 
-export interface AlertSameUserProps {
-  reason: string;
-  navigateToLogin: () => void;
-}
-
-export interface AlertServerErrorProps {
-  reason: string;
-  navigateToLogin: () => void;
-}
+export type AlertSameUserProps = (reason: string, navigate: NavigateFunction) => void;
+export type AlertBadRequestProps = (reason: string, navigate: NavigateFunction) => void;
+export type AlertServerErrorProps = (reason: string, navigate: NavigateFunction) => void;
 
 export interface WebSocketURLParams {
   userId: string;
@@ -297,4 +291,9 @@ export interface BackendEnvironment {
 }
 
 // Create a type for the optional topic parameter
-  
+
+export type NavigateFunction = (path: string) => void;
+
+export type AlertBannedUser = (reason: string, navigate: NavigateFunction) => void;
+
+export type AlertAbnormalCloseProps = (reason: string, navigate: NavigateFunction) => void;
