@@ -23,8 +23,8 @@ export default function Home(){
   const socketRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-  useLoadSetting(setSoundEnabled,setNotificationsEnabled);
-  useSettings(soundEnabled,notificationsEnabled);
+  useLoadSetting({setSoundEnabled,setNotificationsEnabled});
+  useSettings({soundEnabled,notificationsEnabled});
   useWebsocket({soundEnabled,channel,socketRef,setMessages,router,setUnreadCount})
   useLeaveChat(router);
   useVisibilityChange({setUnreadCount});

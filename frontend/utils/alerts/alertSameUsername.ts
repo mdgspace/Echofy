@@ -1,9 +1,8 @@
 "use client";
 import Swal from "sweetalert2";
-
-
-export default function alertSameUsername( reason: string,
-  navigateToLogin: () => void ) {
+import { navigateToLogin } from "../websocket/handleWebSocketClose";
+import {AlertSameUserProps } from "../../interface/interface";
+const alertSameUsername: AlertSameUserProps = (reason, navigate) => {
     try {
       Swal.fire({
         title: "Username already exists",
@@ -24,3 +23,5 @@ export default function alertSameUsername( reason: string,
       });
     } catch (error) {}
   }
+
+  export default alertSameUsername;

@@ -1,4 +1,4 @@
-+"use client";
+"use client";
 import ChatInputBox from "../components/chat/chatInputBox";
 import Box from "../components/mdgBox";
 import { useState, useEffect, useRef } from "react";
@@ -22,8 +22,8 @@ export default function Home() {
   const socketRef = useRef(null);
   const messagesEndRef = useRef(null);
 
-  useLoadSetting(setSoundEnabled,setNotificationsEnabled);
-  useSettings(soundEnabled,notificationsEnabled);
+  useLoadSetting({setSoundEnabled,setNotificationsEnabled});
+  useSettings({soundEnabled,notificationsEnabled});
   useWebsocketForChatbot({socketRef,setMessages,router});
   useVisibilityChange({setUnreadCount});
   // useLeaveChat(router);

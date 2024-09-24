@@ -1,9 +1,8 @@
 "use client";
 import Swal from "sweetalert2";
-
-
-export default function alertBadRequest(reason: string,
-  navigateToLogin: () => void) {
+import { navigateToLogin } from "../websocket/handleWebSocketClose";
+import { AlertBadRequestProps } from "../../interface/interface";
+const alertBadRequest: AlertBadRequestProps = (reason, navigate) => {
     try {
       Swal.fire({
         title: "Bad request",
@@ -23,3 +22,5 @@ export default function alertBadRequest(reason: string,
       });
     } catch (error) {}
   }
+
+  export default alertBadRequest;

@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { UseLoadSettingProps } from '../interface/interface';
 
-
-const useLoadSetting = (setSoundEnabled, setNotificationsEnabled) => {
+const useLoadSetting = ({ setSoundEnabled, setNotificationsEnabled }: UseLoadSettingProps) => {
   useEffect(() => {
     const savedSoundEnabled = localStorage.getItem("soundEnabled");
     const savedNotificationsEnabled = localStorage.getItem("notificationsEnabled");
@@ -18,3 +17,4 @@ const useLoadSetting = (setSoundEnabled, setNotificationsEnabled) => {
 };
 
 export default useLoadSetting;
+

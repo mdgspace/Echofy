@@ -49,10 +49,12 @@ const useWebsocket=({
         const handleError = handleWebSocketError;
         const socket = initializeWebSocketConnection(
           url,
+          {
           handleOpen,
           handleMessage,
           handleClose,
           handleError,
+        }
         );
         socketRef.current = socket;
     
@@ -101,6 +103,7 @@ const useWebsocket=({
                     username: data.sender,
                     timestamp: parseFloat(data.timestamp),
                     avatar: data.url,
+                    userID: data.userID,
                   },
                 ]);
                 if (soundEnabled) playSound(isSent);

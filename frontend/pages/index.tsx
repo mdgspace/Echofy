@@ -52,7 +52,7 @@ export default function Home() {
             <LoginModal onClose={closeModal} redirect={redirect} />
           )}
           {isChatBotModalOpen && (
-            <ChatBotLoginModal onClose={closeChatBotLoginModal} />
+            <ChatBotLoginModal onClose={closeChatBotLoginModal} redirect={redirect} />
           )}
           <div className="col-span-17 flex flex-col justify-center items-center bg-light-grey max-md:col-span-24 rounded-xl mr-[1vw]">
             <div className="w-1/2">
