@@ -84,6 +84,11 @@ export interface MailProps {
     AppStore?: string;
   }
 
+  export interface LoginModalProps {
+    onClose: () => void;
+    redirect: string;
+  }
+
   export interface ChatBotLoginModalProps {
     onClose: () => void; // Function to close the modal
   }
@@ -116,9 +121,9 @@ export interface MailProps {
   }
 
   export interface UseLoadSettingProps {
-    setSoundEnabled: typeof useState;
-    setNotificationsEnabled: typeof useState;
-  }
+    setSoundEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+    setNotificationsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
   export interface UseSettingsProps {
     soundEnabled: boolean;
@@ -239,10 +244,7 @@ export interface ChatInputBoxProps {
   socketRef: React.MutableRefObject<WebSocket | null>;
 }
 
-export interface LoginModalProps {
-  onClose: () => void;
-  redirect: string;
-}
+
 
 export type CheckAndPromptSessionChange = (
   currentUser: string,
@@ -254,3 +256,45 @@ export type GetSessionUser = () => string | null;
 export type GetSessionUserId = () => string | null;
 export type SetSessionUser = (username: string) => void;
 export type RemoveSessionUserId = () => void;
+
+export interface LeaveChatResponse {
+  // Define the expected properties of the response here
+  success: boolean;
+  message?: string;
+}
+
+// Define the return type of the fetchProjects function
+export type FetchProjectsResponse = Project[]; // Array of projects
+
+// Define the interface for a project
+export interface Project {
+  id: string; // Adjust the type as per your actual API response
+  name: string; // Example property
+  description?: string; // Optional property
+  // Add more properties as needed based on your project data structure
+}
+
+// Define the interface for the subscribe response
+export interface SubscribeResponse {
+  code: number;
+  message: string;
+}
+
+// Define the parameters for the subscribe function
+export interface SubscribeParams {
+  email: string;
+  username: string;
+  userId: string;
+  channel: string;
+  timestamp: number;
+}
+
+// Define an interface for the environment variables
+export interface BackendEnvironment {
+  NEXT_PUBLIC_BACKEND_HOST: string;
+  NEXT_PUBLIC_BACKEND_PORT: string;
+  NEXT_PUBLIC_BACKEND_ENVIRONMENT: 'development' | 'production';
+}
+
+// Create a type for the optional topic parameter
+  
