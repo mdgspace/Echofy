@@ -47,14 +47,15 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
       if (currentUser === username) {
         router.push(`/chat?${new URLSearchParams(query).toString()}`);
       } else {
-        const hasChanged = await checkAndPromptSessionChange(
-          currentUser,
-          username,
-          () => {
+        const hasChanged = await checkAndPromptSessionChange({
+          currentUsername: currentUser,
+          inputUsername: username,
+          onConfirm: () => {
             removeSessionUserId();
             setSessionUser(username);
           },
-        );
+        });
+  
         if (hasChanged) {
           router.push(`/chat?${new URLSearchParams(query).toString()}`);
         }

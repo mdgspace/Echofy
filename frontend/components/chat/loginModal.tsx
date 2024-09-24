@@ -7,7 +7,6 @@ import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
 import { toast } from "react-toastify"; // Assuming you're using react-toastify
 import {LoginModalProps} from "../../interface/interface"
-
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const [username, setUsername] = useState("");
@@ -58,14 +57,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
       if (currentUser === username) {
         router.push(`/chat?${queryParams.toString()}`);
       } else {
-        const hasChanged = await checkAndPromptSessionChange(
-          currentUser,
-          username,
-          () => {
+        const hasChanged = await checkAndPromptSessionChange({
+          currentUsername: currentUser,
+          inputUsername: username,
+          onConfirm: () => {
             removeSessionUserId();
             setSessionUser(username);
-          }
-        );
+          },
+        });
         if (hasChanged) {
           router.push(`/chat?${queryParams.toString()}`);
         }

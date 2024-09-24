@@ -95,6 +95,7 @@ export interface MailProps {
     username: string;
     text: string;
     timestamp: number;
+    userID: string;
   }
   export interface ChatContainerProps {
     messages: Message[]; // Assuming messages are serialized JSON strings
@@ -242,3 +243,14 @@ export interface LoginModalProps {
   onClose: () => void;
   redirect: string;
 }
+
+export type CheckAndPromptSessionChange = (
+  currentUser: string,
+  newUsername: string,
+  onSessionChange: () => void
+) => Promise<boolean>;
+
+export type GetSessionUser = () => string | null;
+export type GetSessionUserId = () => string | null;
+export type SetSessionUser = (username: string) => void;
+export type RemoveSessionUserId = () => void;
