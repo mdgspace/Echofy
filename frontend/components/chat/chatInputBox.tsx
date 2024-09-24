@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
 import sendLogo from "../../assets/send.svg";
 import Image from "next/image";
+import { ChatInputBoxProps } from "../../interface/interface";
 
-interface ChatInputBoxProps {
-  socketRef: React.MutableRefObject<WebSocket | null>;
-}
 
 const ChatInputBox: React.FC<ChatInputBoxProps> = ({ socketRef }) => {
   const [newMessage, setNewMessage] = useState("");

@@ -224,3 +224,21 @@ export interface URLBuilderParams {
 export interface LeaveChatURLParams {
   userID: string;
 }
+
+export interface ChatContainerProps {
+  messages: Message[]; // An array of message objects
+  messagesEndRef: React.RefObject<HTMLDivElement>; // A ref for auto-scrolling to the bottom of the chat
+}
+
+export interface AvatarListProps {
+  AvatarList: string[]; // List of avatar image paths/URLs
+}
+
+export interface ChatInputBoxProps {
+  socketRef: React.MutableRefObject<WebSocket | null>;
+}
+
+export interface LoginModalProps {
+  onClose: () => void;
+  redirect: string;
+}
