@@ -19,7 +19,7 @@ const alertAbnormalClose: AlertAbnormalCloseProps = async (reason, navigate) => 
         });
 
         if (result.isConfirmed) {
-            navigateToLogin();
+            navigate("/");
         }
     } catch (error) {
         // More specific error handling here, e.g., log the error

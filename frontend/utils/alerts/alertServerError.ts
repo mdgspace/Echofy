@@ -17,7 +17,7 @@ const alertServerError: AlertServerErrorProps = (reason, navigate) => {
         },
       }).then((result) => {
         try {
-          if (result.isConfirmed) navigateToLogin();
+          if (result.isConfirmed) navigate("/");
         } catch (error) {}
       });
     } catch (error) {}

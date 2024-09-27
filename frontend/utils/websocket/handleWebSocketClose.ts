@@ -11,18 +11,18 @@ import alertSameUsername from "../alerts/alertSameUsername"; // Ensure all alert
 import alertBadRequest from "../alerts/alertBadRequest";
 import alertServerError from "../alerts/alertServerError";
 import alertAbnormalClose from "../alerts/alertAbnormalClose";
-import {useNavigate} from "react-dom"
+import {useNavigate} from "react-router-dom";
 // Define the type for the WebSocket close event
 interface WebSocketCloseEvent {
   code: number;
   reason: string;
 }
 
-const navigate = useNavigate();
 
-  export const navigateToLogin = () => {
-    navigate('/login'); // Adjust the path as needed
-  };
+export function navigateToLogin(): void {
+  const navigate = useNavigate(); // Import the useNavigate hook from react-router-dom
+  navigate("/"); // Adjust the path as needed
+}
 
 // Define the type for the navigate function
 type NavigateFunction = (path: string) => void;
