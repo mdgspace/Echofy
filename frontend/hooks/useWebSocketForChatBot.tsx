@@ -38,10 +38,12 @@ const useWebsocketForChatbot=({socketRef,setMessages,router}:useWebsocketForChat
         const handleError = handleWebSocketError;
         const socket = initializeWebSocketConnection(
           url,
+          {
           handleOpen,
           handleMessage,
           handleClose,
           handleError,
+          }
         );
         socketRef.current = socket;
     
