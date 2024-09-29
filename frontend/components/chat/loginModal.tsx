@@ -5,7 +5,7 @@ import getSessionUserId from "../../utils/session/getSessionUserId";
 import setSessionUser from "../../utils/session/setSessionUser";
 import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
-import { toast } from "react-toastify"; // Assuming you're using react-toastify
+import { toast } from "react-toastify";
 import {LoginModalProps} from "../../interface/interface"
 const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
   const popupRef = useRef<HTMLDivElement>(null);

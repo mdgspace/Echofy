@@ -21,7 +21,7 @@ export default function Mail({
     let timestamp =  Date.now();
     e.preventDefault();
     try {
-      await subscribe(email, username, userId, channel, timestamp);
+      await subscribe({email, username, userId, channel, timestamp});
       onClose();
     } catch (error) {
        //todo -> enable sentry logger here
