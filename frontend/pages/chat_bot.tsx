@@ -26,7 +26,7 @@ export default function Home() {
   useSettings({soundEnabled,notificationsEnabled});
   useWebsocketForChatbot({socketRef,setMessages,router});
   useVisibilityChange({setUnreadCount});
-  // useLeaveChat(router);
+  useLeaveChat(router);
 
   useEffect(() => setTopic(router.query.topic as string ?? "Appetizer"), [router.query]); 
 
