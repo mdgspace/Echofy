@@ -9,6 +9,7 @@ import { TopicDropdown } from "../topicDropdown";
 
 interface ChatBotLoginModalProps {
   onClose: () => void;
+  redirect;
 }
 
 interface DropdownProps {
@@ -17,7 +18,7 @@ interface DropdownProps {
   login?: boolean;
 }
 
-const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
+const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose , redirect}) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const [username, setUsername] = useState<string>("");
   const [topic, setTopic] = useState<string>("SELECT A TOPIC");
