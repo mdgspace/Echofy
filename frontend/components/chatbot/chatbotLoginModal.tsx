@@ -5,15 +5,22 @@ import getSessionUserId from "../../utils/session/getSessionUserId";
 import setSessionUser from "../../utils/session/setSessionUser";
 import removeSessionUserId from "../../utils/session/removeSessionUserId";
 import checkAndPromptSessionChange from "../../utils/alerts/checkAndPromptSessionChange";
+import { TopicDropdown } from "../topicDropdown";
 
-interface LoginModalProps {
+interface ChatBotLoginModalProps {
   onClose: () => void;
-  redirect: string;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
+interface DropdownProps {
+  topic: string;
+  setTopic: React.Dispatch<React.SetStateAction<string>>;
+  login?: boolean;
+}
+
+const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose }) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const [username, setUsername] = useState<string>("");
+  const [topic, setTopic] = useState<string>("SELECT A TOPIC");
   const router = useRouter();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,40 +39,35 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
         onClose();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
   const handleChatWithUsClick = async () => {
-    const chatType = redirect;
     const currentUser = getSessionUser();
     const currentUserId = getSessionUserId();
-    const query = { channel: chatType };
-  
+    
     if (currentUser && currentUserId) {
       if (currentUser === username) {
-        router.push(`/chat?${new URLSearchParams(query).toString()}`);
+        router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
       } else {
         const hasChanged = await checkAndPromptSessionChange({
-          currentUsername: currentUser,
-          inputUsername: username,
-          onConfirm: () => {
+          currentUser,
+          username,
+          onSessionChange: () => {
             removeSessionUserId();
             setSessionUser(username);
           },
         });
-  
         if (hasChanged) {
-          router.push(`/chat?${new URLSearchParams(query).toString()}`);
+          router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
         }
       }
     } else {
       setSessionUser(username);
-      router.push(`/chat?${new URLSearchParams(query).toString()}`);
+      router.push(`/chat_bot?topic=${encodeURIComponent(topic)}`);
     }
   };
-  
 
   return (
     <div className="fixed inset-0 bg-opacity-50 bg-bg-gray flex justify-center items-center backdrop-blur">
@@ -77,6 +79,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
           <div className="w-60 text-center text-md">
             Pick your username and login
           </div>
+
           <div className="rounded-xl text-[#49454F] w-60 flex justify-center items-center">
             <input
               type="text"
@@ -87,11 +90,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
               onKeyDown={handleEnterClick}
             />
           </div>
+          <TopicDropdown topic={topic} setTopic={setTopic} login={true} />
           <div
             className="rounded-full bg-customBlue text-white text-Lato p-2 max-sm:text-xs text-center w-60 rounded-[12.5rem] text-md"
             onClick={handleChatWithUsClick}
           >
-            CHAT WITH US
+            START ASKING
           </div>
         </div>
       </div>
@@ -99,4 +103,4 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, redirect }) => {
   );
 };
 
-export default LoginModal;
+export default ChatBotLoginModal;
