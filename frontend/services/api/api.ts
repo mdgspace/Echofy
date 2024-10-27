@@ -9,7 +9,6 @@ export function initializeWebSocketConnection(
   url: string,
   handlers: WebSocketHandlers
 ): WebSocket {
-  console.log("WebSocket URL:", url);
   const socket = new WebSocket(url);
   
   socket.onopen = handlers.handleOpen;

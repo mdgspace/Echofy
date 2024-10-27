@@ -5,14 +5,14 @@ import Swal, { SweetAlertResult } from "sweetalert2";
 interface CheckAndPromptSessionChangeProps {
   currentUser: string | null;
   username: string | null;
-  onSessionChange: () => void;
+  onConfirm: () => void;
 }
 
 // Function to check and prompt session change using SweetAlert2
 export default async function checkAndPromptSessionChange({
   currentUser,
   username,
-  onSessionChange,
+  onConfirm,
 }: CheckAndPromptSessionChangeProps): Promise<boolean> {
   // Check if the current username exists and differs from the input username
   if (currentUser && currentUser !== username) {
@@ -30,7 +30,7 @@ export default async function checkAndPromptSessionChange({
 
       // If the user confirms and the new username is less than 20 characters
       if (result.isConfirmed && username.length < 20) {
-        onSessionChange();
+        onConfirm();
         return true;
       } else {
         // If the input username exceeds the length limit, display a warning

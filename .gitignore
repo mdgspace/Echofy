@@ -29,7 +29,6 @@ frontend/node_modules/
 
 # testing
 /coverage
-/backend/db/client.go
 # next.js
 frontend/.next/
 /out/

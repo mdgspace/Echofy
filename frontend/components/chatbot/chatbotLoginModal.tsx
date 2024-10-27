@@ -55,7 +55,7 @@ const ChatBotLoginModal: React.FC<ChatBotLoginModalProps> = ({ onClose , redirec
         const hasChanged = await checkAndPromptSessionChange({
           currentUser,
           username,
-          onSessionChange: () => {
+          onConfirm: () => {
             removeSessionUserId();
             setSessionUser(username);
           },

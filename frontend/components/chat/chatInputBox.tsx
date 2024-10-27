@@ -18,7 +18,6 @@ const ChatInputBox: React.FC<ChatInputBoxProps> = ({ socketRef }) => {
 
     const socket = socketRef.current;
     if (socket && socket.readyState === WebSocket.OPEN) {
-      console.log(socket);
       socket.send(newMessage);
       setNewMessage("");
       messageTimesRef.current.push(Date.now());
