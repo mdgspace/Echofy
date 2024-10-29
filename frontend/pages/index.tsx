@@ -10,6 +10,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isChatBotModalOpen, setISChatBotModalOpen] = useState<boolean>(false);
   const [redirect, setRedirect] = useState<string>("");
+  const [isHoveringChatBot,setIsHoveringChatBot]=useState<boolean>(false);
 
   const openModal = (redirect:string) => {
     setIsModalOpen(true);
@@ -91,11 +92,13 @@ export default function Home() {
                 </div>
                 <div
                   className="flex items-center justify-center py-4 w-full  px-8 rounded-full bg-customBlue text-white hover:bg-blue-600 focus:outline-none hover:cursor-pointer focus:ring-2 focus:ring-customBlue focus:ring-opacity-50"
-                  onClick={goToPublicChat}
+                  onClick={()=>window.open("/404", "_blank")}
+                  onMouseEnter={() => setIsHoveringChatBot(true)}
+                  onMouseLeave={() => setIsHoveringChatBot(false)}
                 >
                   <p className="font-Roboto font-medium text-xl tracking-tighter flex gap-2">
                     <Image alt={"slack logo"} src={SlackLogo} />
-                    PUBLIC MDG CHAT FORUM
+                    {isHoveringChatBot ? "COMING SOON" : "PUBLIC MDG CHAT FORUM"}
                   </p>
                 </div>
               </div>
