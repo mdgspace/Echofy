@@ -10,7 +10,6 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isChatBotModalOpen, setISChatBotModalOpen] = useState<boolean>(false);
   const [redirect, setRedirect] = useState<string>("");
-  const [IsHoveringPublicChat,setIsHoveringPublicChat]=useState<boolean>(false);
 
   const openModal = (redirect:string) => {
     setIsModalOpen(true);
@@ -92,18 +91,11 @@ export default function Home() {
                 </div>
                 <div
                   className="flex items-center justify-center py-4 w-full  px-8 rounded-full bg-customBlue text-white hover:bg-blue-600 focus:outline-none hover:cursor-pointer focus:ring-2 focus:ring-customBlue focus:ring-opacity-50"
-                  onMouseEnter={()=>setIsHoveringPublicChat(true)}
-                  onMouseLeave={()=>setIsHoveringPublicChat(false)}
-
-                  onClick={() => window.open("/404", "_blank")}
+                  onClick={goToPublicChat}
                 >
-                  <p className="font-Roboto font-medium text-xl tracking-tighter flex gap-2 transition duration-300" 
-                  style={{
-                    transitionDuration: '1s',
-                  }}
-                  >
+                  <p className="font-Roboto font-medium text-xl tracking-tighter flex gap-2">
                     <Image alt={"slack logo"} src={SlackLogo} />
-                    {IsHoveringPublicChat ? "COMING SOON" : "PUBLIC MDG CHAT FORUM"}
+                    PUBLIC MDG CHAT FORUM
                   </p>
                 </div>
               </div>
