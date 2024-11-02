@@ -47,6 +47,12 @@ export default function Home() {
     }
   }, []);
 
+  return(
+    <>
+    <h1>Not Found 404 ! </h1>
+    </>
+  );
+
   return (
     <>
       <div className="main text-slate-950 bg-white w-full bg-contain ">

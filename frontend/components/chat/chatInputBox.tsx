@@ -68,7 +68,7 @@ const ChatInputBox: React.FC<ChatInputBoxProps> = ({ socketRef }) => {
           onClick={handleSendClick}
           disabled={isTimeout}
           className={`absolute right-2 top-1/2 transform -translate-y-1/2 pr-5 ${
-            isTimeout ? "" : "bg-blue-500"
+            isTimeout ? "bg-blue-500" : ""
           } text-white rounded-full p-2 cursor-pointer`}
         >
           <Image
