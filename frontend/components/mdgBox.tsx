@@ -7,7 +7,6 @@ import { ProjectList } from "./projects/projectList";
 import { BoxProps } from "../interface/interface";
 
 
-
 export default function Box({ channel }: BoxProps) {
   const router = useRouter();
   const arr = ["public", "private", "chatbot"];
@@ -15,6 +14,7 @@ export default function Box({ channel }: BoxProps) {
   const finalArr = newArr.map((item) => item.toUpperCase());
   const isShown = router.pathname === "/";
   const [projects, setProjects] = useState([]);
+  const [isHoveringChatBot,setIsHoveringChatBot]=useState<boolean>(false);
 
   useEffect(() => {
     async function fetchProjectsData() {
@@ -97,13 +97,16 @@ export default function Box({ channel }: BoxProps) {
                 </div>
               </div>
             </div>
-            <div className=" w-1/2 flex-grow bg-blue rounded-full border bg-white border-customBlue hover:bg-gray-50 hover:cursor-pointer flex-2 text-center dark:hover:bg-gray-100">
+            <div className=" w-1/2 flex-grow bg-blue rounded-full border bg-white border-customBlue hover:bg-gray-50 hover:cursor-pointer flex-2 text-center dark:hover:bg-gray-100"
+            onMouseEnter={() => setIsHoveringChatBot(true)}
+            onMouseLeave={() => setIsHoveringChatBot(false)}>
               <div className="p-2.5">
                 <div
                   className=" text-sm text-customBlue border-collapse font-roboto leading-tight tracking-tight text-Roboto font-medium "
                   onClick={handleRoute2}
                 >
-                  JOIN {finalArr[1]} CHAT
+
+                  {isHoveringChatBot ?  "CHATBOT COMING SOON":`JOIN ${finalArr[1]} CHAT` }
                 </div>
               </div>
             </div>
