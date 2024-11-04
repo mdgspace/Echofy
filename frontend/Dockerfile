@@ -1,38 +1,26 @@
-# Stage 1: Build the application
-FROM node:18 AS builder
+# Start from a Node base image
+FROM node:latest
 
 # Set the working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+COPY package*.json ./
+
+# Set the registry
+RUN npm config set registry
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the code
 COPY . .
 
-# Build the Next.js application
+# Build the app
 RUN npm run build
-
-# Stage 2: Serve the application
-FROM node:18 AS production
-
-# Set the working directory
-WORKDIR /app
-
-# Copy only the necessary files from the builder stage
-COPY --from=builder /app/package.json /app/package-lock.json ./
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-
-# Install only production dependencies
-RUN npm install --only=production
 
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Start the application
 CMD ["npm", "start"]
-    
